@@ -1,12 +1,19 @@
 import { TextField } from "@mui/material";
 
-export default function TextFieldComponent({ size, label }) {
+export default function TextFieldComponent({
+  size,
+  label,
+  valueGetter,
+  valueSetter,
+}) {
   return (
     <TextField
       required
       style={{ width: 450, backgroundColor: "", color: "white" }}
       label={label}
       variant="outlined"
+      value={valueGetter}
+      onChange={(e) => valueSetter(e.target.value)}
       size={"size"}
       sx={{
         "& .MuiOutlinedInput-root": {

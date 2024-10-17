@@ -1,0 +1,39 @@
+.body {
+  height: 100%;
+}
+
+/* Conteneur principal du carrousel */
+.carrousselContainer {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* Élément contenant chaque diapositive */
+.sliderItem {
+  width: 200px; /* Largeur fixe pour chaque diapositive */
+  height: 300px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  margin-top: 30px;
+}
+
+/* Images dans les diapositives */
+.sliderImage {
+  width: auto; /* Toujours 100% de la largeur du conteneur */
+  height: 250px; /* Hauteur fixe pour les images */
+  border-radius: 10px; /* Arrondi en haut pour les images */
+  cursor: pointer;
+}
+
+/* Effet de zoom au survol */
+.sliderItem:hover .sliderImage {
+  transform: scale(1.1); /* Zoom à 110% sur l'image */
+}
+
+.title {
+  color: white;
+}
