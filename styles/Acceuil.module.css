@@ -1,0 +1,34 @@
+.body {
+  margin: 0;
+  padding: 0;
+  color: red;
+  background-color: fuchsia;
+}
+
+.carroussel {
+  padding-bottom: 50px;
+}
+
+.filmsByGenre {
+  margin-bottom: 20px; /* Espacement entre les genres */
+}
+
+.title {
+  margin: 0;
+  padding-bottom: 0px; /* Réduit l'espace sous le titre */
+  font-size: 24px;
+  font-weight: bold;
+  text-align: left; /* Garde le titre aligné à gauche */
+  padding-left: 40px;
+}
+
+.filmsByGenre span {
+  margin: 0; /* Enlève la marge par défaut autour des titres */
+  font-size: 24px; /* Taille de police ajustée */
+  line-height: 0.2;
+}
+
+.carrousselAction {
+  margin-top: 0; /* Supprimer tout espacement entre le titre et le carrousel */
+  padding-top: 0; /*Supprime tout padding en haut du carrousel  */
+}

@@ -1,9 +1,10 @@
 import styles from "../styles/Registration.module.css";
 import TextFieldComponent from "./TexfieldComponent";
+import PasswordComponent from "./TexfieldPassword";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import Carroussel from "./Carroussel";
+import Carroussel from "./CarrousselRegist";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { login } from "../reducers/user";
@@ -19,7 +20,7 @@ function Registration() {
 
   const apiKey = "a9f4d3004f4dc397603808cfdd7842b7"; // clé API TMDB
 
-  const regex =
+  const emailRegex =
     /[a-z0-9!#$%&'+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'+/=?^_`{|}~-]+)@(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
   useEffect(() => {
@@ -39,6 +40,13 @@ function Registration() {
   }, [apiKey]);
 
   const handleSignUp = () => {
+    if (!emailRegex.test(signupEmail)) {
+      setMessage("Veuillez entrer un email valide !");
+      return;
+    }
+
+    setMessage("");
+
     fetch("http://localhost:3000/users/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -49,8 +57,11 @@ function Registration() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Réponse complète du serveur :", data);
-        if (data.result) {
+        if (data.error) {
+          setMessage(
+            "Cet email existe déjà. Veuillez utiliser un autre email."
+          );
+        } else if (data.result) {
           dispatch(
             login({
               token: data.newUser.token,
@@ -61,10 +72,19 @@ function Registration() {
           setSignupPassword("");
           router.push("/profil");
         }
+      })
+      .catch((error) => {
+        setMessage(
+          "Une erreur s'est produite lors de l'inscription. Veuillez réessayer."
+        );
       });
   };
 
-  if (!film) return <div>Loading...</div>;
+  const handleSignInClick = () => {
+    router.push("/signin");
+  };
+
+  if (!film) return <div className={styles.loading}>Loading...</div>;
 
   return (
     <div>
@@ -72,36 +92,37 @@ function Registration() {
         <div className={styles.head}>
           <div className={styles.headHead}>
             <img src="" />
-            <button className={styles.btn}>S'identifier</button>
+            <button onClick={handleSignInClick} className={styles.btn}>
+              S'identifier
+            </button>
           </div>
           <div className={styles.containerHead}>
             <h2 className={`${styles.text} ${styles.title}`}>
-              Films et séries en
-              <br /> illimité, et bien plus
+              Trouver une idée de <br />
+              films ou séries pour votre soirée
             </h2>
             <p className={`${styles.text} ${styles.para}`}>
-              Prêt à regarder Netflix ? Saisissez votre adresse e-mail pour vous
-              abonner ou
-              <br /> réactiver votre abonnement.
+              Besoin d'inspiation ?<br />
+              Inscrivez-vous, WIM est la pour vous aider !!!
             </p>
             <div className={styles.info}>
               <TextFieldComponent
-                // size={"small"}
-                style={{ width: 600 }}
                 label={"E-mail"}
                 valueSetter={setSignupEmail}
                 valueGetter={signupEmail}
               />
-              <TextFieldComponent
-                style={{ width: 600 }}
+              <PasswordComponent
                 label={"Mot de passe"}
-                valueSetter={setSignupPassword}
-                valueGetter={signupPassword}
+                valueSette={setSignupPassword}
+                valueGette={signupPassword}
+                type="password"
               />
-              <button className={styles.btnContai} onClick={handleSignUp}>
-                {" "}
-                Commencer <FontAwesomeIcon icon={faChevronRight} />
-              </button>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <button className={styles.btnContai} onClick={handleSignUp}>
+                  {" "}
+                  Commencer <FontAwesomeIcon icon={faChevronRight} />
+                </button>
+              </div>
             </div>
             {message && <p className={styles.message}>{message}</p>}
           </div>

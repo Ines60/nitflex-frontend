@@ -1,0 +1,40 @@
+/* Conteneur principal pour occuper toute la fenêtre */
+.body {
+  width: 100%;
+}
+
+/* Conteneur du carrousel */
+.carrousselContainer {
+  width: 100%;
+  height: 100%;
+}
+
+/* Chaque slide prend toute la largeur et hauteur */
+.sliderItem {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Conteneur d'image */
+.imageContainer {
+  width: 100%;
+  height: 100%;
+}
+
+/* Image en plein écran */
+.sliderImage {
+  width: 100%;
+  height: 100%;
+}
+
+/* Superposition pour titre et note */
+.overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px 20px;
+  border-radius: 5px;
+}

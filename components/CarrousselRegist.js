@@ -11,6 +11,8 @@ import styles from "../styles/Carroussel.module.css";
 import { useState } from "react";
 
 function SampleNextArrow(props) {
+  const [message, setMessage] = useState("");
+
   const { onClick } = props;
   return (
     <div
@@ -68,7 +70,19 @@ function SamplePrevArrow(props) {
   );
 }
 
-const Carroussel = ({ film }) => {
+const CarrousselRegist = ({ film }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Fonction pour ouvrir le modal
+  const handleImageClick = () => {
+    setIsModalOpen(true);
+  };
+
+  // Fonction pour fermer le modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const settings = {
     infinite: false,
     speed: 500,
@@ -82,7 +96,6 @@ const Carroussel = ({ film }) => {
   return (
     <div className={styles.body}>
       <div className={styles.carrousselContainer}>
-        <h2 className={styles.title}>Films tendances</h2>
         <Slider {...settings}>
           {film.map((film, index) => (
             <div key={index} className={styles.sliderItem}>
@@ -90,13 +103,29 @@ const Carroussel = ({ film }) => {
                 className={styles.sliderImage}
                 src={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
                 alt={film.title}
+                onClick={handleImageClick}
               />
             </div>
           ))}
         </Slider>
       </div>
+      {/* isModalOpen est 'true' quand on clique sur une image de film sinon elle est 'false' automatiquement  */}
+      {isModalOpen && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h2>Inscrit toi</h2>
+            <p>
+              Pour voir plus de détails sur ce film, inscris-toi dès maintenant
+              !
+            </p>
+            <button className={styles.closeButton} onClick={closeModal}>
+              Fermer
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default Carroussel;
+export default CarrousselRegist;

@@ -2,17 +2,23 @@ import React, { useState } from "react";
 import TextFieldComponent from "./TexfieldComponent";
 import styles from "../styles/ModalProfil.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Avatar from "./Avatar";
 import { useSelector } from "react-redux";
 
 function ModalProfil({ onAddProfile, handleCloseModal }) {
   const [pseudo, setPseudo] = useState("");
+  const [message, setMessage] = useState("");
+  const [selectedSeed, setSelectedSeed] = useState(""); // Pour stocker l'avatar sélectionné
   const user = useSelector((state) => state.user.value);
+
+  // Cinq seeds différents pour générer cinq avatars selectionné au préalable
+  const avatarSeeds = ["Avery", "Sarah", "Adrian", "Aidan", "uniqueSeed5"];
 
   const handleAddProfil = async (e) => {
     e.preventDefault(); // Empêcher le rechargement de la page lors de la soumission du formulaire
 
-    if (!pseudo) {
-      alert("Veuillez remplir tous les champs");
+    if (!pseudo || !selectedSeed) {
+      setMessage("Veuillez remplir tous les champs");
       return;
     }
 
@@ -23,6 +29,7 @@ function ModalProfil({ onAddProfile, handleCloseModal }) {
         body: JSON.stringify({
           token: user.token, // S'assurer que le token existe, sinon omettre
           pseudo: pseudo, // Envoi du pseudo saisi
+          avatarSeed: selectedSeed, //Envoi du seed de l'avatar
         }),
       };
 
@@ -33,16 +40,15 @@ function ModalProfil({ onAddProfile, handleCloseModal }) {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.log("Erreur du serveur:", errorData);
+
+        setMessage("Erreur lors de l'ajout du profil.");
         throw new Error("Erreur lors de l'ajout du profil");
       }
 
       const data = await response.json();
-      console.log("Profil ajouté avec succès :", data);
 
       // Vérifie que la réponse contient bien le nouveau profil
       if (data && data.result && data.newProfil) {
-        console.log("Nouveau profil reçu:", data.newProfil);
         onAddProfile(data.newProfil); // Passer le nouveau profil au parent
       } else {
         console.error(
@@ -58,19 +64,42 @@ function ModalProfil({ onAddProfile, handleCloseModal }) {
       handleCloseModal();
     } catch (error) {
       console.error("Erreur :", error);
-      alert("Une erreur est survenue lors de l'ajout du profil.");
+      setMessage("Une erreur est survenue lors de l'ajout du profil.");
+    }
+  };
+
+  const handlePseudoChange = (newPseudo) => {
+    setPseudo(newPseudo);
+    if (message) {
+      setMessage(""); // Réinitialise le message d'erreur lorsque l'utilisateur commence à saisir
     }
   };
 
   return (
     <div className={styles.modalContent}>
+      <div>
+        <h1 style={{ display: "flex", justifyContent: "center" }}>
+          Choisis toi avatar
+        </h1>
+        <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+          {avatarSeeds.map((seed) => (
+            <Avatar
+              key={seed}
+              seed={seed}
+              onClick={() => setSelectedSeed(seed)} // Définir l'avatar sélectionné au clic
+              isSelected={selectedSeed === seed} // Met en évidence l'avatar sélectionné
+            />
+          ))}
+        </div>
+      </div>
       <form className={styles.form} onSubmit={handleAddProfil}>
         <TextFieldComponent
-          style={{ width: 200 }}
+          size="small"
           label={"Pseudo"}
-          valueSetter={setPseudo}
+          valueSetter={handlePseudoChange}
           valueGetter={pseudo}
         />
+        {message && <p className={styles.errorMessage}>{message}</p>}
         <button className={styles.btn} type="submit">
           Enregistrer
         </button>

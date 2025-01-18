@@ -1,40 +1,50 @@
 import { TextField } from "@mui/material";
 
 export default function TextFieldComponent({
-  size,
+  id,
   label,
   valueGetter,
   valueSetter,
+  size,
 }) {
   return (
     <TextField
-      required
-      style={{ width: 450, backgroundColor: "", color: "white" }}
+      id={id}
       label={label}
       variant="outlined"
-      value={valueGetter}
       onChange={(e) => valueSetter(e.target.value)}
-      size={"size"}
+      value={typeof valueGetter === "string" ? valueGetter : ""}
+      size={size}
       sx={{
+        width: "450px",
         "& .MuiOutlinedInput-root": {
           "& fieldset": {
-            borderColor: "white", // Bordure inactif
+            borderColor: "#fcfcff",
           },
           "&:hover fieldset": {
-            borderColor: "white", // Bordure au survol
+            borderColor: "#fcfcff",
           },
           "&.Mui-focused fieldset": {
-            borderColor: "white", // Bordure lors de la saisi
+            borderColor: "#fcfcff",
           },
         },
-        "& .MuiInputLabel-root": {
-          color: "white", // Couleur du label inactif
+        "& .MuiInputLabel-outlined": {
+          color: "#fcfcff",
         },
-        "& .MuiInputLabel-root.Mui-focused": {
-          color: "white", // Couleur du label quand du texte est saisi
+        "&:hover .MuiInputLabel-outlined": {
+          color: "#fcfcff",
+        },
+        "&.Mui-focused .MuiInputLabel-outlined": {
+          color: "#fcfcff",
         },
         "& .MuiOutlinedInput-input": {
-          color: "white", // Couleur du texte saisi
+          color: "#fcfcff",
+        },
+        "&:hover .MuiOutlinedInput-input": {
+          color: "#fcfcff",
+        },
+        "&.Mui-focused .MuiOutlinedInput-input": {
+          color: "#fcfcff",
         },
       }}
     />

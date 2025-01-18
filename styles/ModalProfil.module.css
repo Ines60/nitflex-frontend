@@ -1,9 +1,18 @@
 .modalContent {
   border-radius: 10px;
   padding: 20px;
-  width: 300px;
+  /* width: 300px; */
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  background-color: gray;
+}
+
+.form {
+  display: flex;
+  flex-direction: column; /* Les éléments sont disposés en colonne */
+  align-items: center; /* Centre horizontalement les éléments à l'intérieur du formulaire */
 }
 
 .btn {
@@ -11,10 +20,10 @@
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 10px 50px;
   font-size: 16px;
   cursor: pointer;
   margin-top: 20px;
+  padding: 10px 30px;
   transition: background-color 0.3s ease; /* Transition douce pour l'effet hover */
 }
 

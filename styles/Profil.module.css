@@ -1,54 +1,106 @@
-.containt {
-  background-color: pink;
+.body {
+  background-color: #130e0a;
   height: 100vh;
   width: 100vw;
-}
-
-.body {
+  color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: yellow; */
+}
+
+.header {
+  display: flex;
   align-items: center;
 }
 
-.modal {
+.containerModal {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  margin-top: 150px;
-  height: 200px;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .iconProfil {
   color: white;
   font-size: 30px;
   cursor: pointer;
+  margin-left: 55px;
 }
 
-.iconCircle {
-  background-color: red;
-  border-radius: 50%;
-  width: 75px;
-  height: 75px;
+.clicked {
+  transform: scale(0.9); /* Rétrécit l'icône à 90% de sa taille */
+  transition: transform 0.1s ease-in-out;
+}
+
+.modal {
+  position: fixed; /* Permet de fixer la modal sur l'écran */
+  top: 50%; /* Positionne la modal à 50% du haut de la page */
+  left: 50%; /* Positionne la modal à 50% du côté gauche */
+  transform: translate(-50%, -50%); /* Centre parfaitement la modal */
+  border-radius: 10px;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
-.profileList {
+.container {
+  width: 700px;
+  height: 500px;
   display: flex;
-  gap: 50px;
-  margin-top: 100px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.QET {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 80px;
+}
+
+.containerProfils {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.profils {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.543);
+}
+
+.trashIconContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 10px 10px 0;
+}
+
+.trashIcon {
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.clickedAvatar {
+  transform: scale(0.9); /* Rétrécir à 90% */
+  transition: transform 0.1s ease;
+}
+
+.cvp {
+  font-size: 25px;
+  font-weight: 700;
 }
 
 .profileItem {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid blue;
   width: 200px;
   gap: 20px;
+  background-color: green;
 }

@@ -4,21 +4,21 @@
 
 /* Conteneur principal du carrousel */
 .carrousselContainer {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
-  padding: 20px 0;
+  padding-left: 10px 0px;
 }
 
 /* Élément contenant chaque diapositive */
 .sliderItem {
   width: 200px; /* Largeur fixe pour chaque diapositive */
-  height: 300px;
+  height: 250px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 20px;
-  margin-top: 30px;
+  margin-left: 10px;
+  margin-top: 5px;
 }
 
 /* Images dans les diapositives */
@@ -36,4 +36,67 @@
 
 .title {
   color: white;
+}
+
+.modalOverlay {
+  position: fixed; /*pour recouvrir l'ensemble de l'arriere plan */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* applique une oppacité de 50% a l'arriere plan */
+  display: flex; /* centrer la modal */
+  justify-content: center;
+  align-items: center;
+  z-index: 5; /*au dessus de tous les elements*/
+}
+
+.modalContent {
+  background-color: rgba(0, 0, 0, 0.701);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 80%;
+}
+
+.closeButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background-color: rgb(112, 6, 6);
+}
+
+.platformLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #e50914;
+  font-weight: bold;
+}
+
+.platformLink:hover {
+  text-decoration: underline;
+}
+
+.platformLogo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 5px;
 }
