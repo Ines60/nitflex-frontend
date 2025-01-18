@@ -1,8 +1,9 @@
 .body {
   margin: 0;
   padding: 0;
-  color: red;
-  background-color: fuchsia;
+  color: white;
+  background: linear-gradient(#01010d, #050547);
+  height: 100%;
 }
 
 .carroussel {

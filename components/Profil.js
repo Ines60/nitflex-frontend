@@ -32,7 +32,7 @@ function Profil() {
 
   // Fonction pour ajouter un profil à la liste existante et limiter a 5 profils par user
   const handleAddProfile = (newProfil) => {
-    if (profilsData.length < 5) {
+    if (profils.length < 5) {
       // Appel à l'API pour créer un nouveau profil
       fetch("http://localhost:3000/profils/signupProfil", {
         method: "POST",
